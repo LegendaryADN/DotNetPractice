@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:5080
+
+### Read all tasks
+GET {{baseUrl}}/api/tasks
+
+### Read one task
+GET {{baseUrl}}/api/tasks/1
+
+### Create a task (copy the returned ID into the requests below)
+POST {{baseUrl}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Learn dependency injection",
+  "category": "Learning",
+  "isComplete": false
+}
+
+### Update a task (replace 1 with the created ID)
+PUT {{baseUrl}}/api/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Learn dependency injection",
+  "category": "Learning",
+  "isComplete": true
+}
+
+### Trigger validation errors
+POST {{baseUrl}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "",
+  "category": "Other"
+}
+
+### Delete a task (replace 1 with the created ID)
+DELETE {{baseUrl}}/api/tasks/1
+
+### Observe a missing resource
+GET {{baseUrl}}/api/tasks/999999

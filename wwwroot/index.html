@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176449">
+  <title>TaskLab | My workspace</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="TaskLab home"><img src="/favicon.svg" width="34" height="34" alt="">TaskLab<span class="brand-tag">WORKSPACE</span></a>
+    <span class="connection" id="connection" role="status"><span class="status-dot"></span>Connecting</span>
+  </header>
+  <main>
+    <div class="page-heading">
+      <div><p class="eyebrow">A LITTLE PROGRESS, EVERY DAY</p><h1>My workspace<span>.</span></h1><p class="date" id="today"></p></div>
+      <button class="button primary" id="new-task"><i data-lucide="plus" aria-hidden="true"></i>New task</button>
+    </div>
+    <section class="overview" aria-label="Task overview">
+      <div class="metric"><span>Total tasks</span><strong id="total-count">0</strong><i data-lucide="layers" aria-hidden="true"></i></div>
+      <div class="metric"><span>In progress</span><strong id="active-count">0</strong><i data-lucide="circle-dashed" aria-hidden="true"></i></div>
+      <div class="metric"><span>Completed</span><strong id="complete-count">0</strong><i data-lucide="circle-check" aria-hidden="true"></i></div>
+      <div class="metric progress-metric"><span>Completion rate</span><strong id="progress-label">0%</strong><progress id="progress" max="100" value="0" aria-label="Completion rate"></progress></div>
+    </section>
+    <div class="workspace-grid">
+      <section class="task-section" aria-labelledby="tasks-heading">
+        <div class="section-heading"><h2 id="tasks-heading">Your tasks <span id="visible-count">0</span></h2><button class="icon-button" id="refresh" title="Refresh tasks" aria-label="Refresh tasks"><i data-lucide="refresh-cw" aria-hidden="true"></i></button></div>
+        <div class="task-toolbar">
+          <div class="filters" role="group" aria-label="Filter tasks">
+            <button type="button" class="filter selected" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter" data-filter="active" aria-pressed="false">In progress</button>
+            <button type="button" class="filter" data-filter="completed" aria-pressed="false">Completed</button>
+          </div>
+          <label class="search"><i data-lucide="search" aria-hidden="true"></i><input id="search" type="search" placeholder="Search tasks" aria-label="Search tasks" maxlength="100"></label>
+        </div>
+        <div class="error-banner" id="page-error" role="alert" hidden></div>
+        <div id="task-list" class="task-list" aria-live="polite" aria-busy="true"><p class="empty">Loading tasks...</p></div>
+        <div class="list-footer"><span id="list-summary">Loading workspace</span><span class="storage-note"><i data-lucide="database" aria-hidden="true"></i>In-memory storage</span></div>
+      </section>
+      <aside class="inspector" aria-labelledby="inspector-heading">
+        <div class="inspector-heading"><div class="terminal-symbol"><i data-lucide="square-terminal" aria-hidden="true"></i></div><h2 id="inspector-heading">API activity</h2><span class="live-label">LATEST</span></div>
+        <div class="request-line"><span class="method" id="request-method">GET</span><code id="request-path">/api/tasks</code></div>
+        <div class="response-heading"><span>RESPONSE</span><span id="response-status" role="status">Pending</span></div>
+        <pre class="response-body" tabindex="0" aria-label="Latest API response"><code id="response-body">Waiting for a response...</code></pre>
+        <div class="request-footer"><span id="request-time">--</span><span>application/json</span></div>
+      </aside>
+    </div>
+    <footer class="page-footer"><span><span class="footer-mark">TL</span>Small steps. Real progress.</span><span>ASP.NET Core <span class="footer-divider">/</span> .NET 10</span></footer>
+  </main>
+  <dialog id="task-dialog" aria-labelledby="dialog-title">
+    <form id="task-form">
+      <div class="dialog-heading"><h2 id="dialog-title">New task</h2><button type="button" id="close-dialog" class="icon-button" title="Close dialog" aria-label="Close dialog"><i data-lucide="x" aria-hidden="true"></i></button></div>
+      <label class="field">Task title<input id="task-title" name="title" required maxlength="100" placeholder="What would you like to work on?"></label>
+      <label class="field">Category<select id="task-category" name="category"><option>Learning</option><option>Practice</option><option>Project</option></select></label>
+      <label class="completed-field"><input id="task-completed" type="checkbox">Mark as completed</label>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" id="cancel-dialog">Cancel</button><button class="button primary" type="submit" id="save-task"><i data-lucide="check" aria-hidden="true"></i>Save task</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
